@@ -1,0 +1,33 @@
+{
+    "name": "PlayerInput",
+    "maps": [
+        {
+            "name": "Movement",
+            "id": "b04149c3-b042-42a5-a441-23e161e56f72",
+            "actions": [
+                {
+                    "name": "View",
+                    "type": "Value",
+                    "id": "ce5b1084-ee95-4965-aa25-1ec38803cb1f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ed95e68f-536f-45e3-9a7a-eb6a02a78940",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "InvertVector2(invertX=false)",
+                    "groups": "",
+                    "action": "View",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
