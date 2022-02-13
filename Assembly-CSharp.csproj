@@ -56,14 +56,29 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Rotator.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerFactory.cs" />
+    <Compile Include="Assets\Scripts\Player\Input\RotationInputGetter.cs" />
+    <Compile Include="Assets\Scripts\Core\RouletteGame.cs" />
+    <Compile Include="Assets\Scripts\Core\MainInstaller.cs" />
+    <Compile Include="Assets\Scripts\Player\Enablers\GameStartUIToggler.cs" />
     <Compile Include="Assets\ParrelSync\Examples\CustomArgumentExample.cs" />
-    <Compile Include="Assets\Scripts\CameraEnabler.cs" />
-    <Compile Include="Assets\Scripts\NewRotator.cs" />
-    <Compile Include="Assets\Scripts\Inputs\PlayerInput.cs" />
-    <Compile Include="Assets\Scripts\HostUIEnabler.cs" />
-    <Compile Include="Assets\Scripts\MainInstaller.cs" />
-    <Compile Include="Assets\Scripts\GameStep.cs" />
+    <Compile Include="Assets\Scripts\Core\CustomNetworkManager.cs" />
+    <Compile Include="Assets\Scripts\Player\Enablers\CameraEnabler.cs" />
+    <Compile Include="Assets\Scripts\Player\GameStarter.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerPositionSetter.cs" />
+    <Compile Include="Assets\Scripts\Revolver\RevolverLoad.cs" />
+    <Compile Include="Assets\Scripts\Player\Input\FireInputHandler.cs" />
+    <Compile Include="Assets\Scripts\Input\InputContainer.cs" />
+    <Compile Include="Assets\Scripts\Player\Input\FireInputGetter.cs" />
+    <Compile Include="Assets\Scripts\Input\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\Input\InputGetter.cs" />
+    <Compile Include="Assets\Scripts\Player\Input\RotationInputHandler.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerCounter.cs" />
+    <Compile Include="Assets\Scripts\Core\PlayersList.cs" />
+    <Compile Include="Assets\Scripts\Core\GameSteps.cs" />
+    <Compile Include="Assets\Scripts\Core\CoroutineUser.cs" />
+    <Compile Include="Assets\Scripts\Revolver\RevolverFire.cs" />
+    <Compile Include="Assets\Scripts\Core\RevolverInstaller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />
