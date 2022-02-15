@@ -11,13 +11,16 @@ public abstract class CoroutineUser : MonoBehaviour
         StartCoroutine();
     }
 
-    public void StartCoroutine()
+    public virtual void StartCoroutine()
     {
         _enumerator = Coroutine();
         StartCoroutine(_enumerator);
     }
 
-    public void StopCoroutine() => StopCoroutine(_enumerator);
+    public void StopCoroutine()
+    {
+        StopCoroutine(_enumerator);
+    }
 
     public abstract IEnumerator Coroutine();
 }

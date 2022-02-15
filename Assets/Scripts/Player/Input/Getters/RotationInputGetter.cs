@@ -17,11 +17,11 @@ public class RotationInputGetter : InputGetter
 
     protected override void Subscribe()
     {
-        _inputContainer.Input.Movement.View.performed += GetInput;
+        _inputContainer.Input.Main.View.performed += GetContext;
     }
 
     protected override void Unsubscribe()
     {
-        _inputContainer.Input.Movement.View.performed -= GetInput;
+        _inputContainer.Input.Main.View.performed -= GetContext;
     }
 }

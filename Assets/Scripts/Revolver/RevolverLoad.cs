@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RevolverLoad : MonoBehaviour
 {
-    [SerializeField] private float _maxClipAmmo;
-    [SerializeField] private float _minClipAmmo;
+    [SerializeField] private int _maxClipAmmo;
+    [SerializeField] private int _minClipAmmo;
 
-    private Stack<bool> _bulletCells = new Stack<bool>();
+    private BulletCells _bulletCells;
 
-    public Stack<bool> BulletCells => _bulletCells;
+    public BulletCells BulletCells => _bulletCells;
 
     private void Awake()
     {
+        _bulletCells = new BulletCells(_maxClipAmmo);
         Load();
     }
 
@@ -20,15 +19,13 @@ public class RevolverLoad : MonoBehaviour
     {
         for (int i = 0; i < _maxClipAmmo; i++)
         {
-            _bulletCells.Push(GetRandomTrueFalse());
+            bool item = GetRandomBoolean();
+            _bulletCells.Set(item, i);
         }
     }
 
-    public void LoadWithClean()
+    private bool GetRandomBoolean()
     {
-        _bulletCells.Clear();
-        Load();
+        return Random.Range(0, 2) == 0;
     }
-
-    private bool GetRandomTrueFalse() => UnityEngine.Random.Range(0, 1) == 0;
 }

@@ -2,7 +2,7 @@
     "name": "PlayerInput",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Main",
             "id": "b04149c3-b042-42a5-a441-23e161e56f72",
             "actions": [
                 {
@@ -14,9 +14,9 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Fire",
+                    "name": "StartButtonPress",
                     "type": "Button",
-                    "id": "6a0de06e-f74b-4eca-8c60-65162200bfb0",
+                    "id": "30205789-5d39-4958-888d-8b7abceef6f6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -36,12 +36,58 @@
                 },
                 {
                     "name": "",
-                    "id": "f9ac5655-e63a-4660-bdee-1f2f174f8a8c",
+                    "id": "dfa2a09d-9db6-47bf-9567-fd4a2af1a0e5",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartButtonPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Revolver",
+            "id": "e3d4f5a2-3de1-4fc8-872d-da571f9a93dc",
+            "actions": [
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "b511502e-c519-44fe-bd07-532692bae564",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Scroll",
+                    "type": "Button",
+                    "id": "35086495-3368-4266-99a4-b406b69ee054",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "17ee3eb1-4f16-4064-8ee3-9a114586488a",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8dde7779-0250-4f28-8a61-7d63840d2bcb",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

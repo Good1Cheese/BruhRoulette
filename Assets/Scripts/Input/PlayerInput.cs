@@ -15,7 +15,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     ""name"": ""PlayerInput"",
     ""maps"": [
         {
-            ""name"": ""Movement"",
+            ""name"": ""Main"",
             ""id"": ""b04149c3-b042-42a5-a441-23e161e56f72"",
             ""actions"": [
                 {
@@ -27,9 +27,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Fire"",
+                    ""name"": ""StartButtonPress"",
                     ""type"": ""Button"",
-                    ""id"": ""6a0de06e-f74b-4eca-8c60-65162200bfb0"",
+                    ""id"": ""30205789-5d39-4958-888d-8b7abceef6f6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -49,12 +49,58 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f9ac5655-e63a-4660-bdee-1f2f174f8a8c"",
+                    ""id"": ""dfa2a09d-9db6-47bf-9567-fd4a2af1a0e5"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartButtonPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Revolver"",
+            ""id"": ""e3d4f5a2-3de1-4fc8-872d-da571f9a93dc"",
+            ""actions"": [
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""b511502e-c519-44fe-bd07-532692bae564"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""Button"",
+                    ""id"": ""35086495-3368-4266-99a4-b406b69ee054"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""17ee3eb1-4f16-4064-8ee3-9a114586488a"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8dde7779-0250-4f28-8a61-7d63840d2bcb"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -63,10 +109,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // Movement
-        m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
-        m_Movement_View = m_Movement.FindAction("View", throwIfNotFound: true);
-        m_Movement_Fire = m_Movement.FindAction("Fire", throwIfNotFound: true);
+        // Main
+        m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
+        m_Main_View = m_Main.FindAction("View", throwIfNotFound: true);
+        m_Main_StartButtonPress = m_Main.FindAction("StartButtonPress", throwIfNotFound: true);
+        // Revolver
+        m_Revolver = asset.FindActionMap("Revolver", throwIfNotFound: true);
+        m_Revolver_Fire = m_Revolver.FindAction("Fire", throwIfNotFound: true);
+        m_Revolver_Scroll = m_Revolver.FindAction("Scroll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -113,49 +163,95 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Movement
-    private readonly InputActionMap m_Movement;
-    private IMovementActions m_MovementActionsCallbackInterface;
-    private readonly InputAction m_Movement_View;
-    private readonly InputAction m_Movement_Fire;
-    public struct MovementActions
+    // Main
+    private readonly InputActionMap m_Main;
+    private IMainActions m_MainActionsCallbackInterface;
+    private readonly InputAction m_Main_View;
+    private readonly InputAction m_Main_StartButtonPress;
+    public struct MainActions
     {
         private @PlayerInput m_Wrapper;
-        public MovementActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @View => m_Wrapper.m_Movement_View;
-        public InputAction @Fire => m_Wrapper.m_Movement_Fire;
-        public InputActionMap Get() { return m_Wrapper.m_Movement; }
+        public MainActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @View => m_Wrapper.m_Main_View;
+        public InputAction @StartButtonPress => m_Wrapper.m_Main_StartButtonPress;
+        public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MovementActions set) { return set.Get(); }
-        public void SetCallbacks(IMovementActions instance)
+        public static implicit operator InputActionMap(MainActions set) { return set.Get(); }
+        public void SetCallbacks(IMainActions instance)
         {
-            if (m_Wrapper.m_MovementActionsCallbackInterface != null)
+            if (m_Wrapper.m_MainActionsCallbackInterface != null)
             {
-                @View.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnView;
-                @View.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnView;
-                @View.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnView;
-                @Fire.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnFire;
-                @Fire.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnFire;
-                @Fire.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnFire;
+                @View.started -= m_Wrapper.m_MainActionsCallbackInterface.OnView;
+                @View.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnView;
+                @View.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnView;
+                @StartButtonPress.started -= m_Wrapper.m_MainActionsCallbackInterface.OnStartButtonPress;
+                @StartButtonPress.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnStartButtonPress;
+                @StartButtonPress.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnStartButtonPress;
             }
-            m_Wrapper.m_MovementActionsCallbackInterface = instance;
+            m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @View.started += instance.OnView;
                 @View.performed += instance.OnView;
                 @View.canceled += instance.OnView;
-                @Fire.started += instance.OnFire;
-                @Fire.performed += instance.OnFire;
-                @Fire.canceled += instance.OnFire;
+                @StartButtonPress.started += instance.OnStartButtonPress;
+                @StartButtonPress.performed += instance.OnStartButtonPress;
+                @StartButtonPress.canceled += instance.OnStartButtonPress;
             }
         }
     }
-    public MovementActions @Movement => new MovementActions(this);
-    public interface IMovementActions
+    public MainActions @Main => new MainActions(this);
+
+    // Revolver
+    private readonly InputActionMap m_Revolver;
+    private IRevolverActions m_RevolverActionsCallbackInterface;
+    private readonly InputAction m_Revolver_Fire;
+    private readonly InputAction m_Revolver_Scroll;
+    public struct RevolverActions
+    {
+        private @PlayerInput m_Wrapper;
+        public RevolverActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Fire => m_Wrapper.m_Revolver_Fire;
+        public InputAction @Scroll => m_Wrapper.m_Revolver_Scroll;
+        public InputActionMap Get() { return m_Wrapper.m_Revolver; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(RevolverActions set) { return set.Get(); }
+        public void SetCallbacks(IRevolverActions instance)
+        {
+            if (m_Wrapper.m_RevolverActionsCallbackInterface != null)
+            {
+                @Fire.started -= m_Wrapper.m_RevolverActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_RevolverActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_RevolverActionsCallbackInterface.OnFire;
+                @Scroll.started -= m_Wrapper.m_RevolverActionsCallbackInterface.OnScroll;
+                @Scroll.performed -= m_Wrapper.m_RevolverActionsCallbackInterface.OnScroll;
+                @Scroll.canceled -= m_Wrapper.m_RevolverActionsCallbackInterface.OnScroll;
+            }
+            m_Wrapper.m_RevolverActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
+                @Scroll.started += instance.OnScroll;
+                @Scroll.performed += instance.OnScroll;
+                @Scroll.canceled += instance.OnScroll;
+            }
+        }
+    }
+    public RevolverActions @Revolver => new RevolverActions(this);
+    public interface IMainActions
     {
         void OnView(InputAction.CallbackContext context);
+        void OnStartButtonPress(InputAction.CallbackContext context);
+    }
+    public interface IRevolverActions
+    {
         void OnFire(InputAction.CallbackContext context);
+        void OnScroll(InputAction.CallbackContext context);
     }
 }

@@ -2,12 +2,12 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(InputContainer))]
-public class FireInputGetter : InputGetter
+public class FireButtonInputGetter : InputGetter
 {
-    private FireInputHandler _handler;
+    private FireButtonInputHandler _handler;
 
     [Inject]
-    public void Construct(FireInputHandler handler)
+    public void Construct(FireButtonInputHandler handler)
     {
         _handler = handler;
     }
@@ -19,11 +19,11 @@ public class FireInputGetter : InputGetter
 
     protected override void Subscribe()
     {
-        _inputContainer.Input.Movement.Fire.performed += GetInput;
+        _inputContainer.Input.Revolver.Fire.performed += GetContext;
     }
 
     protected override void Unsubscribe()
     {
-        _inputContainer.Input.Movement.Fire.performed -= GetInput;
+        _inputContainer.Input.Revolver.Fire.performed -= GetContext;
     }
 }

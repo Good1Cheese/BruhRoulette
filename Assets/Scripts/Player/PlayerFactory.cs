@@ -5,7 +5,7 @@ using Zenject;
 public class PlayerFactory : PlaceholderFactory<Transform>
 {
     private DiContainer _container;
-    private PlayerPositionSetter _positionSetter;
+    private PlayerSpawnPositionSetter _positionSetter;
     private GameObject _clientPlayer;
     private GameObject _hostPlayer;
 
@@ -13,7 +13,7 @@ public class PlayerFactory : PlaceholderFactory<Transform>
 
     [Inject]
     public void Construct(DiContainer container,
-                          PlayerPositionSetter positionSetter,
+                          PlayerSpawnPositionSetter positionSetter,
                           [Inject(Id = "Client")] GameObject prefab,
                           [Inject(Id = "Host")] GameObject hostPrefab)
     {

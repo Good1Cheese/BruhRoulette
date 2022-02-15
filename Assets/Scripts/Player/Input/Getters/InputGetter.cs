@@ -12,7 +12,7 @@ public abstract class InputGetter : NetworkBehaviour
         Subscribe();
     }
 
-    protected void GetInput(InputAction.CallbackContext context)
+    protected void GetContext(InputAction.CallbackContext context)
     {
         if (!isLocalPlayer) { return; }
 

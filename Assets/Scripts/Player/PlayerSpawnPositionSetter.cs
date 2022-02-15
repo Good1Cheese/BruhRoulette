@@ -1,13 +1,13 @@
 using Mirror;
 using UnityEngine;
 
-public class PlayerPositionSetter : MonoBehaviour
+public class PlayerSpawnPositionSetter : MonoBehaviour
 {
     [SerializeField] private Transform[] _spawnPoints;
 
     public void Set(Transform player)
     {
-        var currentSpawnPoint = _spawnPoints[NetworkServer.connections.Count - 1];
+        Transform currentSpawnPoint = _spawnPoints[NetworkServer.connections.Count - 1];
         player.SetPositionAndRotation(currentSpawnPoint.position, currentSpawnPoint.rotation);
     }
 }

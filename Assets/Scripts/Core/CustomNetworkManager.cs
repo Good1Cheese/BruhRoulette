@@ -19,7 +19,7 @@ public class CustomNetworkManager : NetworkManager
 
     private void SpawnNewPlayer(NetworkConnection conn)
     {
-        var newPlayer = _playerFactory.Create();
+        UnityEngine.Transform newPlayer = _playerFactory.Create();
         NetworkServer.AddPlayerForConnection(conn, newPlayer.gameObject);
     }
 }
