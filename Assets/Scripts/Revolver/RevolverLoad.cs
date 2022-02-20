@@ -1,31 +1,41 @@
 ﻿using UnityEngine;
+using Zenject;
 
 public class RevolverLoad : MonoBehaviour
 {
-    [SerializeField] private int _maxClipAmmo;
-    [SerializeField] private int _minClipAmmo;
+    private RevolverCells _revolverCells;
+    private PlayersList _playersList;
+    private GameStart _gameStart;
 
-    private BulletCells _bulletCells;
+    public RevolverCells RevolverCells => _revolverCells;
 
-    public BulletCells BulletCells => _bulletCells;
-
-    private void Awake()
+    [Inject]
+    public void Construct(PlayersList playersList, GameStart gameStart)
     {
-        _bulletCells = new BulletCells(_maxClipAmmo);
-        Load();
+        _playersList = playersList;
+        _gameStart = gameStart;
+    }
+
+    private void Start()
+    {
+        _gameStart.Started += Load;
     }
 
     private void Load()
     {
-        for (int i = 0; i < _maxClipAmmo; i++)
+        _revolverCells = new RevolverCells(_playersList.List.Count);
+
+        for (int i = 0; i < _playersList.List.Count; i++)
         {
             bool item = GetRandomBoolean();
-            _bulletCells.Set(item, i);
+            _revolverCells.Set(item);
         }
     }
 
-    private bool GetRandomBoolean()
+    private bool GetRandomBoolean() => Random.Range(0, 2) == 0;
+
+    private void OnDestroy()
     {
-        return Random.Range(0, 2) == 0;
+        _gameStart.Started -= Load;
     }
 }

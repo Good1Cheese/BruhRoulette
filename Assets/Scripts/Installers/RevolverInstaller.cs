@@ -6,5 +6,8 @@ public class RevolverInstaller : MonoInstaller
     {
         Container.BindInstance(GetComponent<RevolverLoad>())
             .AsSingle();
+
+        Container.BindInstance(GetComponent<RevolverFire>())
+            .AsSingle();
     }
 }

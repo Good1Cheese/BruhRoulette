@@ -6,41 +6,45 @@ public class ButtonInputHandler : MonoBehaviour
 {
     private GameStart _gameStart;
     private GameProgress _gameProgress;
-    private bool _isHandled;
+    private GameStop _gameStop;
+
+    private bool _handled;
 
     public uint CurrentPlayerNetId { get; set; }
     public Action Handled { get; set; }
 
     [Inject]
-    public void Construct(GameStart gameStart, GameProgress gameProgress)
+    public void Construct(GameStart gameStart, GameProgress gameProgress, GameStop gameStop)
     {
         _gameStart = gameStart;
         _gameProgress = gameProgress;
+        _gameStop = gameStop;
     }
 
     private void Start()
     {
-        _gameProgress.CurrentPlayerNetIdUpdated += UpdateCurrentPlayerNetId;
+        _gameProgress.CurrentNetIdUpdated += UpdateCurrentNetId;
     }
 
-    private void UpdateCurrentPlayerNetId(uint value)
+    private void UpdateCurrentNetId(uint value)
     {
-        _isHandled = false;
+        _handled = false;
         CurrentPlayerNetId = value;
     }
 
     public void Handle(uint netId)
     {
-        if (!_gameStart.GameStarted
-            || netId != CurrentPlayerNetId
-            || _isHandled) { return; }
+        if (!_gameStart.IsStarted
+            || _gameStop.IsStoped
+            || _handled
+            || netId != CurrentPlayerNetId) { return; }
 
-        _isHandled = true;
+        _handled = true;
         Handled?.Invoke();
     }
 
     private void OnDestroy()
     {
-        _gameProgress.CurrentPlayerNetIdUpdated -= UpdateCurrentPlayerNetId;
+        _gameProgress.CurrentNetIdUpdated -= UpdateCurrentNetId;
     }
 }

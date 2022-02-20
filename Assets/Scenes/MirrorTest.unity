@@ -169,7 +169,6 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 535213378}
-  - {fileID: 9141292538776381039}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -438,6 +437,8 @@ GameObject:
   - component: {fileID: 535213382}
   - component: {fileID: 535213379}
   - component: {fileID: 535213384}
+  - component: {fileID: 535213386}
+  - component: {fileID: 535213387}
   - component: {fileID: 535213378}
   m_Layer: 0
   m_Name: GameContoller
@@ -473,8 +474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6798ce311228f9f4dbbebd4c55be22b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clientPlayer: {fileID: 2741898089104567747, guid: 8e6f93769507a3546bdaa098cc58f946, type: 3}
-  _hostPlayer: {fileID: 2741898089104567747, guid: 7a8a492c7e7be814cb4bf0480ec5c5db, type: 3}
+  _clientPrefab: {fileID: 2741898089104567747, guid: 8e6f93769507a3546bdaa098cc58f946, type: 3}
+  _hostPrefab: {fileID: 2741898089104567747, guid: 7a8a492c7e7be814cb4bf0480ec5c5db, type: 3}
 --- !u!114 &535213379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,7 +542,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 535213376}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53403cff5ead672478ebdc6ddf64f3db, type: 3}
+  m_Script: {fileID: 11500000, guid: 548012f3942b9804795a7f8dff8f0264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &535213384
@@ -556,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87449ae95f675e9489f4820202543068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stepTime: 30
+  _moveTime: 30
 --- !u!114 &535213385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,6 +570,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff240ad28c849848a6ac5cf6201f137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &535213386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535213376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c99ff4b5ebc2d9499bd0634a3ff30ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &535213387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535213376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 535213383}
+  - {fileID: 535213380}
+  - {fileID: 535213381}
+  - {fileID: 535213385}
+  - {fileID: 535213382}
+  - {fileID: 535213379}
+  - {fileID: 535213384}
+  - {fileID: 535213386}
+  _identifier: 
+  _useSceneContext: 1
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &540067655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,8 +2015,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52dead2bba8eac549944d98cfc287146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxClipAmmo: 6
-  _minClipAmmo: 1
 --- !u!1 &4762611591898273508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2441,7 +2477,7 @@ GameObject:
   - component: {fileID: 3691646209216861316}
   - component: {fileID: 3691646209216861315}
   - component: {fileID: 8536393796179242477}
-  - component: {fileID: 9141292538776381039}
+  - component: {fileID: 8536393796179242478}
   m_Layer: 0
   m_Name: Revolver
   m_TagString: Untagged
@@ -2490,6 +2526,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322b6416bdca45b4ea50dd3862ef6478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxScrollAmount: 4
+  _minScrollAmount: 1
+--- !u!114 &8536393796179242478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8536393796179242474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 3691646209216861316}
+  - {fileID: 3691646209216861315}
+  _identifier: 
+  _useSceneContext: 1
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &8770180873416479713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,18 +2638,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &9141292538776381039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8536393796179242474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c65bff26083b60242b46548d332bf5a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &9150361049320101152
 MeshRenderer:
   m_ObjectHideFlags: 0

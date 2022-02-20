@@ -3,13 +3,17 @@ using UnityEngine;
 
 public class PlayersList : MonoBehaviour
 {
-    private readonly List<uint> _list = new List<uint>();
+    public List<GamePlayer> List { get; set; } = new List<GamePlayer>();
 
-    public List<uint> List => _list;
-    public uint this[int index] => _list[index];
+    public void Add(uint netId) => List.Add(new GamePlayer(netId));
 
-    public void Add(uint netId)
+    public GamePlayer GetRandom()
     {
-        _list.Add(netId);
+        int randomIndex = Random.Range(0, List.Count);
+        GamePlayer result = List[randomIndex];
+
+        List.Remove(result);
+
+        return result;
     }
 }

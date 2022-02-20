@@ -2,31 +2,30 @@
 using UnityEngine;
 using Zenject;
 
-public class PlayerFactory : PlaceholderFactory<Transform>
+public class PlayerFactory : IFactory<Transform>
 {
     private DiContainer _container;
-    private PlayerSpawnPositionSetter _positionSetter;
-    private GameObject _clientPlayer;
-    private GameObject _hostPlayer;
+    private PlayerSpawnPositionSetter _spawnPositionSetter;
+    private GameObject _clientPrefab;
+    private GameObject _hostPrefab;
 
     private Transform _newPlayer;
 
-    [Inject]
-    public void Construct(DiContainer container,
-                          PlayerSpawnPositionSetter positionSetter,
-                          [Inject(Id = "Client")] GameObject prefab,
+    public PlayerFactory(DiContainer container,
+                          PlayerSpawnPositionSetter spawnPositionSetter,
+                          [Inject(Id = "Client")] GameObject clientprefab,
                           [Inject(Id = "Host")] GameObject hostPrefab)
     {
         _container = container;
-        _positionSetter = positionSetter;
-        _clientPlayer = prefab;
-        _hostPlayer = hostPrefab;
+        _spawnPositionSetter = spawnPositionSetter;
+        _clientPrefab = clientprefab;
+        _hostPrefab = hostPrefab;
     }
 
-    public override Transform Create()
+    public Transform Create()
     {
         _newPlayer = CreateNewPlayer().transform;
-        _positionSetter.Set(_newPlayer);
+        _spawnPositionSetter.Set(_newPlayer);
 
         return _newPlayer;
     }
@@ -35,9 +34,9 @@ public class PlayerFactory : PlaceholderFactory<Transform>
     {
         if (NetworkServer.connections.Count <= 1)
         {
-            return _container.InstantiatePrefab(_hostPlayer);
+            return _container.InstantiatePrefab(_hostPrefab);
         }
 
-        return _container.InstantiatePrefab(_clientPlayer);
+        return _container.InstantiatePrefab(_clientPrefab);
     }
 }

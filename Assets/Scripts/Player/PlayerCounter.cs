@@ -11,9 +11,12 @@ public class PlayerCounter : NetworkBehaviour
         _counter = counter;
     }
 
-    public override void OnStartServer()
+    public override void OnStartClient()
     {
-        base.OnStartServer();
-        _counter.Add(netId);
+        base.OnStartClient();
+        AddPlayer();
     }
+
+    [Command]
+    private void AddPlayer() => _counter.Add(netId);
 }

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 1615322003308791677}
   - component: {fileID: 3410126086273895190}
   m_Layer: 0
-  m_Name: Player
+  m_Name: ClientPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,6 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _xSensivity: 4
   _ySensivity: 4
+  _maxHorizontal: 180
+  _maxVertical: 45
 --- !u!114 &1615322003308791677
 MonoBehaviour:
   m_ObjectHideFlags: 0

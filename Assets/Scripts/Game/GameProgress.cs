@@ -5,60 +5,63 @@ using Zenject;
 
 public class GameProgress : CoroutineUser
 {
-    [SerializeField] private float _stepTime;
+    [SerializeField] private float _moveTime;
 
     private FireButtonInputHandler _fireInputHandler;
     private PlayersList _playerList;
+    private GameStop _gameStop;
+    private RevolverFire _revolverFire;
+    private WaitForSeconds _moveTimeout;
+    private GamePlayer _currentPlayer;
 
-    private int _currentPlayerIndex;
-    private WaitForSeconds _stepTimeout;
-
-    public Action<uint> CurrentPlayerNetIdUpdated { get; set; }
+    public Action<uint> CurrentNetIdUpdated { get; set; }
 
     [Inject]
-    public void Construct(FireButtonInputHandler fireInputHandler, PlayersList playersList)
+    public void Construct(FireButtonInputHandler fireInputHandler,
+                          PlayersList playersList,
+                          GameStop gameStop,
+                          RevolverFire revolverFire)
     {
         _fireInputHandler = fireInputHandler;
         _playerList = playersList;
+        _gameStop = gameStop;
+        _revolverFire = revolverFire;
     }
 
     private void Start()
     {
-        _stepTimeout = new WaitForSeconds(_stepTime);
+        _moveTimeout = new WaitForSeconds(_moveTime);
 
-        _fireInputHandler.Handled += StartWithInterrupt;
+        _fireInputHandler.Handled += StartNext;
     }
 
-    public override void StartCoroutine()
+    public void StartNext()
     {
-        base.StartCoroutine();
-        _currentPlayerIndex = UnityEngine.Random.Range(0, _playerList.List.Count - 1) - 1;
+        _currentPlayer.MadeMove = true;
+        _revolverFire.Fire();
+        _gameStop.StopGameIfNeeded();
+
+        if (_gameStop.IsStoped) { return; }
+
+        StartWithInterrupt();
     }
 
     public override IEnumerator Coroutine()
     {
-        UpdatePlayerIndex();
+        _currentPlayer = _playerList.GetRandom();
 
-        CurrentPlayerNetIdUpdated.Invoke(_playerList[_currentPlayerIndex]);
+        print($"Now is turn player with ID - {_currentPlayer.NetId}");
 
-        yield return _stepTimeout;
+        CurrentNetIdUpdated?.Invoke(_currentPlayer.NetId);
 
-        Debug.Log("Time out");
+        yield return _moveTimeout;
+
+        print($"Move time finished on player with ID - {_currentPlayer.NetId}");
         StartWithInterrupt();
-    }
-
-    private void UpdatePlayerIndex()
-    {
-        _currentPlayerIndex++;
-
-        if (_currentPlayerIndex >= _playerList.List.Count)
-        {
-            _currentPlayerIndex = 0;
-        }
     }
 
     private void OnDestroy()
     {
-        _fireInputHandler.Handled -= StartWithInterrupt;
+        _fireInputHandler.Handled -= StartNext;
     }
 }

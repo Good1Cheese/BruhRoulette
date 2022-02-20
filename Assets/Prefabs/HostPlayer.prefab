@@ -240,6 +240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _xSensivity: 4
   _ySensivity: 4
+  _maxHorizontal: 180
+  _maxVertical: 45
 --- !u!114 &1615322003308791677
 MonoBehaviour:
   m_ObjectHideFlags: 0

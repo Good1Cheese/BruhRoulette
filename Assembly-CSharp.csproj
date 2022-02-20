@@ -59,11 +59,13 @@
     <Compile Include="Assets\Scripts\Player\Input\Getters\InputGetter.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerFactory.cs" />
     <Compile Include="Assets\Scripts\Input\InputContainer.cs" />
+    <Compile Include="Assets\Scripts\Core\PlayersList.cs" />
     <Compile Include="Assets\Scripts\Core\CoroutineUser.cs" />
     <Compile Include="Assets\Scripts\Installers\RevolverInstaller.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Handlers\RotationInputHandler.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Getters\RotationInputGetter.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Getters\FireButtonInputGetter.cs" />
+    <Compile Include="Assets\Scripts\Game\GameStop.cs" />
     <Compile Include="Assets\Scripts\Revolver\RevolverFire.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Handlers\ButtonInputHandler.cs" />
     <Compile Include="Assets\Scripts\Game\GameStart.cs" />
@@ -71,20 +73,20 @@
     <Compile Include="Assets\Scripts\Player\Enablers\GameStartUIToggler.cs" />
     <Compile Include="Assets\Scripts\Game\GameProgress.cs" />
     <Compile Include="Assets\Scripts\Revolver\RevolverLoad.cs" />
+    <Compile Include="Assets\Scripts\Input\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Handlers\FireButtonInputHandler.cs" />
+    <Compile Include="Assets\Scripts\Revolver\RevolverCells.cs" />
     <Compile Include="Assets\ParrelSync\Examples\CustomArgumentExample.cs" />
     <Compile Include="Assets\Scripts\Core\CustomNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCounter.cs" />
+    <Compile Include="Assets\Scripts\Core\GamePlayer.cs" />
+    <Compile Include="Assets\Scripts\Revolver\RevolverScroll.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerSpawnPositionSetter.cs" />
-    <Compile Include="Assets\Scripts\Core\PlayersList.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Getters\StartButtonPressGetter.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Getters\ScrollButtonInputGetter.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Handlers\ScrollButtonInputHandler.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Handlers\StartButtonPressHandler.cs" />
     <Compile Include="Assets\Scripts\Player\Enablers\CameraEnabler.cs" />
-    <Compile Include="Assets\Scripts\Input\PlayerInput.cs" />
-    <Compile Include="Assets\Scripts\Revolver\RevolverScroll.cs" />
-    <Compile Include="Assets\Scripts\Revolver\BulletCells.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />

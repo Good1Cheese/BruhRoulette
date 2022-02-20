@@ -1,3 +1,4 @@
+using Mirror;
 using Zenject;
 
 public class ScrollButtonInputGetter : InputGetter
@@ -10,10 +11,10 @@ public class ScrollButtonInputGetter : InputGetter
         _handler = handler;
     }
 
-    protected override void OnInputGetted()
-    {
-        _handler.Handle(netId);
-    }
+    protected override void OnInputGetted() => CmdHandleInput();
+
+    [Command]
+    private void CmdHandleInput() => _handler.Handle(netId);
 
     protected override void Subscribe()
     {

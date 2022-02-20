@@ -27,7 +27,7 @@ public class RevolverScroll : MonoBehaviour
 
         for (int i = 0; i < scrollCount; i++)
         {
-            _revolverLoad.BulletCells.Scroll();
+            _revolverLoad.RevolverCells.Scroll();
         }
     }
 

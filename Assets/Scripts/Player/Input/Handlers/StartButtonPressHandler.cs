@@ -22,7 +22,7 @@ public class StartButtonPressHandler : MonoBehaviour
 
         if (!Physics.Raycast(_ray, out RaycastHit raycastHit, _pressMaxDistance, _startButtonMask)) { return; }
 
-        if (_gameStart.GameStarted) { return; }
+        if (_gameStart.IsStarted) { return; }
 
         raycastHit.collider.gameObject.SetActive(false);
         _gameStart.StartGame();

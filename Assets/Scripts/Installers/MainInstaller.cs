@@ -1,51 +1,28 @@
+using System;
 using UnityEngine;
 using Zenject;
 
 public class MainInstaller : MonoInstaller
 {
-    [SerializeField] private GameObject _clientPlayer;
-    [SerializeField] private GameObject _hostPlayer;
+    [SerializeField] private GameObject _clientPrefab;
+    [SerializeField] private GameObject _hostPrefab;
 
     public override void InstallBindings()
     {
         BindPlayer();
-        BindInputHandlers();
-
-        Container.BindInstance(GetComponent<GameStart>())
-            .AsSingle();
-
-        Container.BindInstance(GetComponent<GameProgress>())
-            .AsSingle();
     }
 
     private void BindPlayer()
     {
-        Container.BindInstance(GetComponent<PlayerSpawnPositionSetter>())
-            .AsSingle();
-
-        Container.BindInstance(GetComponent<PlayersList>())
-            .AsSingle();
-
-        Container.BindInstance(_clientPlayer)
+        Container.BindInstance(_clientPrefab)
             .WithId("Client")
             .AsCached();
 
-        Container.BindInstance(_hostPlayer)
+        Container.BindInstance(_hostPrefab)
             .WithId("Host")
             .AsCached();
 
-        Container.BindFactory<Transform, PlayerFactory>().FromComponentInNewPrefab(_clientPlayer);
-    }
-
-    private void BindInputHandlers()
-    {
-        Container.BindInstance(GetComponent<FireButtonInputHandler>())
-            .AsSingle();
-
-        Container.BindInstance(GetComponent<ScrollButtonInputHandler>())
-            .AsSingle();
-
-        Container.BindInstance(GetComponent<StartButtonPressHandler>())
-            .AsSingle();
+        Container.Bind<PlayerFactory>().AsSingle();
+        Container.BindIFactory<Transform, PlayerFactory>().AsSingle();
     }
 }

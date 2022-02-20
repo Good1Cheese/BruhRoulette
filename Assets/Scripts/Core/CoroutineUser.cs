@@ -5,13 +5,13 @@ public abstract class CoroutineUser : MonoBehaviour
 {
     private IEnumerator _enumerator;
 
-    public void StartWithInterrupt()
+    public virtual void StartWithInterrupt()
     {
         StopCoroutine();
         StartCoroutine();
     }
 
-    public virtual void StartCoroutine()
+    public void StartCoroutine()
     {
         _enumerator = Coroutine();
         StartCoroutine(_enumerator);

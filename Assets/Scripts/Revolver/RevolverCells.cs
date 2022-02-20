@@ -1,34 +1,33 @@
 ﻿using System;
 
-public class BulletCells
+public class RevolverCells
 {
     private readonly bool[] _cells;
     private readonly bool[] _cellsBeforeScroll;
 
-    public BulletCells(int cellsCount)
+    private int _cellIndex = -1;
+
+    public RevolverCells(int cellsCount)
     {
         _cells = new bool[cellsCount];
         _cellsBeforeScroll = new bool[cellsCount];
     }
 
-    public bool LastCell
+    public void Set(bool item)
     {
-        get => _cells[_cells.Length - 1];
-        set => _cells[_cells.Length - 1] = value;
-    }
-
-    public void Set(bool item, int index)
-    {
-        _cells[index] = item;
+        _cellIndex++;
+        _cells[_cellIndex] = item;
     }
 
     public bool GetLast()
     {
-        bool last = LastCell;
-        LastCell = false;
-        Scroll();
+        bool currentCell = _cells[_cellIndex];
+        _cells[_cellIndex] = false;
 
-        return last;
+        Scroll();
+        _cellIndex--;
+
+        return currentCell;
     }
 
     public void Scroll()

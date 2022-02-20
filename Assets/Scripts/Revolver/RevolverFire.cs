@@ -3,32 +3,24 @@ using Zenject;
 
 public class RevolverFire : MonoBehaviour
 {
-    private FireButtonInputHandler _fireInputHandler;
     private RevolverLoad _revolverLoad;
 
     [Inject]
-    public void Construct(FireButtonInputHandler fireInputHandler, RevolverLoad revolverLoad)
+    public void Construct(RevolverLoad revolverLoad)
     {
-        _fireInputHandler = fireInputHandler;
         _revolverLoad = revolverLoad;
     }
 
-    private void Start()
+    public void Fire()
     {
-        _fireInputHandler.Handled += Fire;
-    }
+        bool cellLoaded = _revolverLoad.RevolverCells.GetLast();
 
-    private void Fire()
-    {
-        bool cellLoaded = _revolverLoad.BulletCells.GetLast();
+        if (cellLoaded)
+        {
+            print("Current Player fired. He is DEAD");
+            return;
+        }
 
-        if (!cellLoaded) { return; }
-
-        Debug.Log("Смерть");
-    }
-
-    private void OnDestroy()
-    {
-        _fireInputHandler.Handled -= Fire;
+        print("Current Player fired. He is ALIVE");
     }
 }

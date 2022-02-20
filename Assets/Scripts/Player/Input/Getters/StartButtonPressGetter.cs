@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 using Zenject;
 
@@ -18,10 +19,10 @@ public class StartButtonPressGetter : InputGetter
         _camera = cameraEnabler.Camera.transform;
     }
 
-    protected override void OnInputGetted()
-    {
-        _handler.Handle(_camera.transform); 
-    }
+    protected override void OnInputGetted() => CmdHandleInput();
+
+    [Command]
+    private void CmdHandleInput() => _handler.Handle(_camera.transform);
 
     protected override void Subscribe()
     {
