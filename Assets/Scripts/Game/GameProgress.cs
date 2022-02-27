@@ -9,23 +9,21 @@ public class GameProgress : CoroutineUser
 
     private FireButtonInputHandler _fireInputHandler;
     private PlayersList _playerList;
-    private GameStop _gameStop;
-    private RevolverFire _revolverFire;
+    private GameEnd _gameEnd;
     private WaitForSeconds _moveTimeout;
-    private GamePlayer _currentPlayer;
 
-    public Action<uint> CurrentNetIdUpdated { get; set; }
+    public GamePlayer CurrentPlayer { get; set; }
+    public Action MoveMade { get; set; }
+    public Action<GamePlayer> CurrentNetIdUpdated { get; set; }
 
     [Inject]
     public void Construct(FireButtonInputHandler fireInputHandler,
                           PlayersList playersList,
-                          GameStop gameStop,
-                          RevolverFire revolverFire)
+                          GameEnd gameEnd)
     {
         _fireInputHandler = fireInputHandler;
         _playerList = playersList;
-        _gameStop = gameStop;
-        _revolverFire = revolverFire;
+        _gameEnd = gameEnd;
     }
 
     private void Start()
@@ -37,27 +35,23 @@ public class GameProgress : CoroutineUser
 
     public void StartNext()
     {
-        _currentPlayer.MadeMove = true;
-        _revolverFire.Fire();
-        _gameStop.StopGameIfNeeded();
+        MoveMade?.Invoke();
+        CurrentPlayer.IsMoveMade = true;
+        StopCoroutine();
 
-        if (_gameStop.IsStoped) { return; }
+        if (_gameEnd.IsEnded) { return; }
 
-        StartWithInterrupt();
+        StartCoroutine();
     }
 
     public override IEnumerator Coroutine()
     {
-        _currentPlayer = _playerList.GetRandom();
-
-        print($"Now is turn player with ID - {_currentPlayer.NetId}");
-
-        CurrentNetIdUpdated?.Invoke(_currentPlayer.NetId);
+        CurrentPlayer = _playerList.GetRandom();
+        CurrentNetIdUpdated?.Invoke(CurrentPlayer);
 
         yield return _moveTimeout;
 
-        print($"Move time finished on player with ID - {_currentPlayer.NetId}");
-        StartWithInterrupt();
+        StartNext();
     }
 
     private void OnDestroy()

@@ -1,22 +1,30 @@
 using Mirror;
+using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(DeathPush))]
 public class PlayerCounter : NetworkBehaviour
 {
-    private PlayersList _counter;
+    private PlayersList _list;
+    private GamePlayer _player;
 
     [Inject]
-    public void Construct(PlayersList counter)
+    public void Construct(PlayersList list)
     {
-        _counter = counter;
+        _list = list;
     }
 
     public override void OnStartClient()
     {
         base.OnStartClient();
-        AddPlayer();
+
+        _player = new GamePlayer(netId, transform, GetComponent<DeathPush>());
+        CmdAddPlayer();
     }
 
     [Command]
-    private void AddPlayer() => _counter.Add(netId);
+    private void CmdAddPlayer()
+    {
+        _list.Add(_player);
+    }
 }

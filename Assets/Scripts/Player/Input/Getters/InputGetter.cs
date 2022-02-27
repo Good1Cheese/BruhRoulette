@@ -6,10 +6,9 @@ public abstract class InputGetter : NetworkBehaviour
     protected InputContainer _inputContainer;
     protected InputAction.CallbackContext _context;
 
-    private void Start()
+    protected void Awake()
     {
         _inputContainer = GetComponent<InputContainer>();
-        Subscribe();
     }
 
     protected void GetContext(InputAction.CallbackContext context)
@@ -20,6 +19,10 @@ public abstract class InputGetter : NetworkBehaviour
         OnInputGetted();
     }
 
+    private void OnEnable()
+    {
+        Subscribe();
+    }
 
     private void OnDestroy()
     {

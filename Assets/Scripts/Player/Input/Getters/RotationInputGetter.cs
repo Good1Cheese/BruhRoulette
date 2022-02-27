@@ -5,13 +5,17 @@ public class RotationInputGetter : InputGetter
 {
     private RotationInputHandler _handler;
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
+
         _handler = GetComponent<RotationInputHandler>();
     }
 
     protected override void OnInputGetted()
     {
+        if (!isLocalPlayer) { return; }
+
         _handler.Handle(_context);
     }
 
@@ -22,6 +26,6 @@ public class RotationInputGetter : InputGetter
 
     protected override void Unsubscribe()
     {
-        _inputContainer.Input.Main.View.performed -= GetContext;
+        _inputContainer.Input.Main.View.performed -= GetContext; 
     }
 }

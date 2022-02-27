@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class RotationInputHandler : MonoBehaviour
@@ -10,22 +9,19 @@ public class RotationInputHandler : MonoBehaviour
     [SerializeField] private int _maxHorizontal;
     [SerializeField] private int _maxVertical;
 
+    [SerializeField] private Transform _horizontalTarget;
+    [SerializeField] private Transform _verticalTarget;
+
     private float _horizontal;
     private float _vertical;
-    private Transform _camera;
-
-    private void Awake()
-    {
-        CameraEnabler cameraEnabler = GetComponent<CameraEnabler>();
-        _camera = cameraEnabler.Camera.transform;
-    }
 
     public void Handle(InputAction.CallbackContext context)
     {
         GetRotationFromContext(context);
         ClampRotation();
 
-        _camera.localRotation = Quaternion.Euler(_vertical, _horizontal, 0);
+        _horizontalTarget.localRotation = Quaternion.Euler(_horizontal, 0, 0);
+        _verticalTarget.localRotation = Quaternion.Euler(_vertical, 0, 0);
     }
 
     private void GetRotationFromContext(InputAction.CallbackContext context)

@@ -3,18 +3,24 @@ using Zenject;
 
 public class ScrollButtonInputGetter : InputGetter
 {
-    private ScrollButtonInputHandler _handler;
+    private SpinButtonInputHandler _handler;
 
     [Inject]
-    public void Construct(ScrollButtonInputHandler handler)
+    public void Construct(SpinButtonInputHandler handler)
     {
         _handler = handler;
     }
 
-    protected override void OnInputGetted() => CmdHandleInput();
+    protected override void OnInputGetted()
+    {
+        CmdHandleInput();
+    }
 
     [Command]
-    private void CmdHandleInput() => _handler.Handle(netId);
+    private void CmdHandleInput()
+    {
+        _handler.Handle(netId);
+    }
 
     protected override void Subscribe()
     {

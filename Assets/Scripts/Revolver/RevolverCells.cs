@@ -15,17 +15,15 @@ public class RevolverCells
 
     public void Set(bool item)
     {
-        _cellIndex++;
-        _cells[_cellIndex] = item;
+        _cells[++_cellIndex] = item;
     }
 
     public bool GetLast()
     {
         bool currentCell = _cells[_cellIndex];
-        _cells[_cellIndex] = false;
+        _cells[_cellIndex--] = false;
 
         Scroll();
-        _cellIndex--;
 
         return currentCell;
     }

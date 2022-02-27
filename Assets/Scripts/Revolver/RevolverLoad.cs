@@ -32,7 +32,10 @@ public class RevolverLoad : MonoBehaviour
         }
     }
 
-    private bool GetRandomBoolean() => Random.Range(0, 2) == 0;
+    private bool GetRandomBoolean()
+    {
+        return Random.Range(0, 2) == 0;
+    }
 
     private void OnDestroy()
     {

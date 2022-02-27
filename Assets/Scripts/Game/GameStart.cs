@@ -17,7 +17,6 @@ public class GameStart : MonoBehaviour
 
     public void StartGame()
     {
-        print("Game Start");
         IsStarted = true;
         Started?.Invoke();
 

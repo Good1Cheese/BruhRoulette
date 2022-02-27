@@ -4,10 +4,12 @@ public class RevolverInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.BindInstance(GetComponent<RevolverLoad>())
-            .AsSingle();
+        Container.Bind<RevolverShot>()
+                 .FromNew()
+                 .AsSingle();
 
-        Container.BindInstance(GetComponent<RevolverFire>())
-            .AsSingle();
+        Container.Bind<RevolverClick>()
+                 .FromNew()
+                 .AsSingle();
     }
 }

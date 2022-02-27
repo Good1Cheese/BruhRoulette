@@ -13,16 +13,24 @@ public class StartButtonPressGetter : InputGetter
         _handler = handler;
     }
 
-    private void Awake()
+    private new void Awake()
     {
-        CameraEnabler cameraEnabler = GetComponent<CameraEnabler>();
-        _camera = cameraEnabler.Camera.transform;
+        base.Awake();
+
+        var cameraToggler = GetComponent<CameraToggler>();
+        _camera = cameraToggler.Camera.transform;
     }
 
-    protected override void OnInputGetted() => CmdHandleInput();
+    protected override void OnInputGetted()
+    {
+        CmdHandleInput();
+    }
 
     [Command]
-    private void CmdHandleInput() => _handler.Handle(_camera.transform);
+    private void CmdHandleInput()
+    {
+        _handler.Handle(_camera.transform);
+    }
 
     protected override void Subscribe()
     {
