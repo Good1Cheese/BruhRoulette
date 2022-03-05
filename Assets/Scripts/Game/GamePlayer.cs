@@ -1,17 +1,11 @@
-﻿using UnityEngine;
-
-public class GamePlayer
+﻿public class GamePlayer
 {
-    public GamePlayer(uint netId, Transform transform, DeathPush deathPush)
+    public GamePlayer(uint netId, PlayerTogglersEnablerDisabler togglersToggle)
     {
         NetId = netId;
-        Transform = transform;
-        DeathPush = deathPush;
+        TogglersToggle = togglersToggle;
     }
 
     public uint NetId { get; private set; }
-    public Transform Transform { get; private set; }
-    public DeathPush DeathPush { get; private set; }
-
-    public bool IsMoveMade { get; set; }
+    public PlayerTogglersEnablerDisabler TogglersToggle { get; private set; }
 }

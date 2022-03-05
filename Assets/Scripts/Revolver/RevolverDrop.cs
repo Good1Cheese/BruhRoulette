@@ -5,32 +5,34 @@ using Zenject;
 public class RevolverDrop : ExplosionForceUser
 {
     private GameEnd _gameEnd;
-    private Rigidbody _rigidbody;
+    private GameRestart _gameRestart;
+
+    private RigidbodyToggler _rigidbodyToggler;
 
     [Inject]
-    public void Construct(GameEnd gameEnd)
+    public void Construct(GameEnd gameEnd, GameRestart gameRestart)
     {
         _gameEnd = gameEnd;
+        _gameRestart = gameRestart;
+
+        _rigidbodyToggler = new RigidbodyToggler(GetComponent<Rigidbody>());
     }
 
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-
+        _gameRestart.Restarted += _rigidbodyToggler.Disable;
         _gameEnd.Ended += Drop;
     }
 
     private void Drop()
     {
-        _rigidbody.isKinematic = false;
-        _rigidbody.useGravity = true;
-
-        GetRandomPosition();
-        AddExplositionForce(_rigidbody);
+        _rigidbodyToggler.Enable();
+        AddExplositionForce(_rigidbodyToggler.Rigidbody);
     }
 
     private void OnDestroy()
     {
+        _gameRestart.Restarted -= _rigidbodyToggler.Disable;
         _gameEnd.Ended -= Drop;
     }
 }

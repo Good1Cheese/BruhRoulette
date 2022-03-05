@@ -1,45 +1,25 @@
 using Mirror;
 using UnityEngine;
 
-public class CameraToggler : NetworkBehaviour
+public class CameraToggler : Togglable
 {
     [SerializeField] private Camera _camera;
 
-    private DelayAfterDeath _delayAfterDeath;
-
     public Camera Camera => _camera;
 
-    private void Awake()
-    {
-        _delayAfterDeath = GetComponent<DelayAfterDeath>();
-    }
+    public override void Toggle(bool value) => _camera.enabled = value;
 
-    private void Start()
+    private new void OnEnable()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    public override void OnStartLocalPlayer()
-    {
-        Enable();
-        base.OnStartLocalPlayer();
-    }
-
-    private void Enable() => Camera.enabled = true;
-    private void Disable() => Camera.enabled = false;
-
-    private void OnEnable()
-    {
-        _delayAfterDeath.Done += Disable;
+        base.OnEnable();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    private void OnDestroy()
+    private new void OnDestroy()
     {
-        _delayAfterDeath.Done -= Disable;
+        base.OnDestroy();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

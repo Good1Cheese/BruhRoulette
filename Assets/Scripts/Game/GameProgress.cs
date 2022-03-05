@@ -8,7 +8,7 @@ public class GameProgress : CoroutineUser
     [SerializeField] private float _moveTime;
 
     private FireButtonInputHandler _fireInputHandler;
-    private PlayersList _playerList;
+    private GamePlayersList _currentPlayersList;
     private GameEnd _gameEnd;
     private WaitForSeconds _moveTimeout;
 
@@ -18,11 +18,11 @@ public class GameProgress : CoroutineUser
 
     [Inject]
     public void Construct(FireButtonInputHandler fireInputHandler,
-                          PlayersList playersList,
+                          GamePlayersList currentPlayersList,
                           GameEnd gameEnd)
     {
         _fireInputHandler = fireInputHandler;
-        _playerList = playersList;
+        _currentPlayersList = currentPlayersList;
         _gameEnd = gameEnd;
     }
 
@@ -36,9 +36,9 @@ public class GameProgress : CoroutineUser
     public void StartNext()
     {
         MoveMade?.Invoke();
-        CurrentPlayer.IsMoveMade = true;
         StopCoroutine();
 
+        print(_gameEnd.IsEnded);
         if (_gameEnd.IsEnded) { return; }
 
         StartCoroutine();
@@ -46,7 +46,7 @@ public class GameProgress : CoroutineUser
 
     public override IEnumerator Coroutine()
     {
-        CurrentPlayer = _playerList.GetRandom();
+        CurrentPlayer = _currentPlayersList.GetRandom();
         CurrentNetIdUpdated?.Invoke(CurrentPlayer);
 
         yield return _moveTimeout;

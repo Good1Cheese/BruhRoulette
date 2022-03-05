@@ -1,27 +1,24 @@
-using UnityEngine;
-
-public class InputContainer : MonoBehaviour
+public class InputContainer : Togglable
 {
     private PlayerInput _input;
-    private DelayAfterDeath _delayAfterDeath;
 
     public PlayerInput Input => _input;
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
+
         _input = new PlayerInput();
-        _delayAfterDeath = GetComponent<DelayAfterDeath>();
     }
 
-    private void OnEnable()
+    public override void Toggle(bool value)
     {
-        Input.Enable();
-        _delayAfterDeath.Done += OnDestroy;
-    }
+        if (value)
+        {
+            Input.Enable();
+            return;
+        }
 
-    private void OnDestroy()
-    {
-        Input.Disable();
-        _delayAfterDeath.Done -= OnDestroy;
+        Input.Dispose();
     }
 }

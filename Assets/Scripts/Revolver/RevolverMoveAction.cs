@@ -8,17 +8,17 @@ public class RevolverMoveAction : RevolverAction
     private GameProgress _gameProgress;
 
     [Inject]
-    public void Construct(GameProgress gameProgress)
+    public void Construct(GameProgress gameProgress, RevolverMove revolverMove)
     {
         _gameProgress = gameProgress;
+
+        _revolverMove = revolverMove;
+        _revolverMove.MoveTime = _actionDelay;
     }
 
     private new void Awake()
     {
         base.Awake();
-
-        _revolverMove = GetComponent<RevolverMove>();
-        _revolverMove.MoveTime = _actionDelay;
 
         _gameProgress.CurrentNetIdUpdated += MoveNext;
     }

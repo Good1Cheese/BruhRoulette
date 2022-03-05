@@ -1,7 +1,8 @@
 using Mirror;
 using UnityEngine;
 
-public class PlayerSpawnPositionSetter : MonoBehaviour
+//[RequireComponent(typeof(PlayersPositionReset))]
+public class PlayersSpawnPositionSetter : MonoBehaviour
 {
     [SerializeField] private Transform[] _spawnPoints;
 

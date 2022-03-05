@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-public class GameStartUIEnabler : NetworkBehaviour
+public class GameStartUIToggler : NetworkBehaviour
 {
     [SerializeField] private GameObject _hostUI;
 

@@ -5,14 +5,14 @@ using Zenject;
 public class PlayerFactory : IFactory<Transform>
 {
     private readonly DiContainer _container;
-    private readonly PlayerSpawnPositionSetter _spawnPositionSetter;
+    private readonly PlayersSpawnPositionSetter _spawnPositionSetter;
     private readonly GameObject _clientPrefab;
     private readonly GameObject _hostPrefab;
 
     private Transform _newPlayer;
 
     public PlayerFactory(DiContainer container,
-                          PlayerSpawnPositionSetter spawnPositionSetter,
+                          PlayersSpawnPositionSetter spawnPositionSetter,
                           [Inject(Id = "Client")] GameObject clientprefab,
                           [Inject(Id = "Host")] GameObject hostPrefab)
     {

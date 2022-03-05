@@ -10,17 +10,14 @@ public class ExplosionForceUser : NetworkBehaviour
 
     private Vector3 _randomPosition;
 
-    protected void GetRandomPosition()
-    {
-        _randomPosition = transform.position + UnityEngine.Random.insideUnitSphere * _randomSphereRadiusMultiplier;
-    }
-
     protected void AddExplositionForce(Rigidbody rigidbody)
     {
+        _randomPosition = transform.position + Random.insideUnitSphere * _randomSphereRadiusMultiplier;
+
         rigidbody.AddExplosionForce(_explosionForce,
-                                 _randomPosition,
-                                 _explosionRadius,
-                                 _upwardsModifier,
-                                 ForceMode.Impulse);
+                                    _randomPosition,
+                                    _explosionRadius,
+                                    _upwardsModifier,
+                                    ForceMode.Impulse);
     }
 }

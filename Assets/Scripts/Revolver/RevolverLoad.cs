@@ -3,16 +3,16 @@ using Zenject;
 
 public class RevolverLoad : MonoBehaviour
 {
+    private const int CellsCount = 6;
+
     private RevolverCells _revolverCells;
-    private PlayersList _playersList;
     private GameStart _gameStart;
 
     public RevolverCells RevolverCells => _revolverCells;
 
     [Inject]
-    public void Construct(PlayersList playersList, GameStart gameStart)
+    public void Construct(GameStart gameStart)
     {
-        _playersList = playersList;
         _gameStart = gameStart;
     }
 
@@ -23,19 +23,13 @@ public class RevolverLoad : MonoBehaviour
 
     private void Load()
     {
-        _revolverCells = new RevolverCells(_playersList.List.Count);
+        _revolverCells = new RevolverCells(CellsCount);
 
-        for (int i = 0; i < _playersList.List.Count; i++)
-        {
-            bool item = GetRandomBoolean();
-            _revolverCells.Set(item);
-        }
+        var random = GetRandomCell();
+        _revolverCells.SetGay(random);
     }
 
-    private bool GetRandomBoolean()
-    {
-        return Random.Range(0, 2) == 0;
-    }
+    private int GetRandomCell() => Random.Range(0, 5);
 
     private void OnDestroy()
     {

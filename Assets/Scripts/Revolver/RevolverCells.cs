@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class RevolverCells
 {
@@ -7,21 +8,29 @@ public class RevolverCells
 
     private int _cellIndex = -1;
 
+    public bool[] Cells => _cells;
+
     public RevolverCells(int cellsCount)
     {
         _cells = new bool[cellsCount];
         _cellsBeforeScroll = new bool[cellsCount];
+        _cellIndex = cellsCount - 1;
     }
 
-    public void Set(bool item)
+    public void SetGay(int index)
     {
-        _cells[++_cellIndex] = item;
+        Cells[index] = true;
+
+        for (int i = 0; i < _cells.Length; i++)
+        {
+            Debug.Log(_cells[i]);
+        }
     }
 
     public bool GetLast()
     {
-        bool currentCell = _cells[_cellIndex];
-        _cells[_cellIndex--] = false;
+        bool currentCell = Cells[_cellIndex];
+        Cells[_cellIndex--] = false;
 
         Scroll();
 
@@ -30,13 +39,13 @@ public class RevolverCells
 
     public void Scroll()
     {
-        Array.Copy(_cells, _cellsBeforeScroll, _cells.Length);
+        Array.Copy(Cells, _cellsBeforeScroll, Cells.Length);
 
-        _cells[0] = _cellsBeforeScroll[_cells.Length - 1];
+        Cells[0] = _cellsBeforeScroll[Cells.Length - 1];
 
-        for (int i = 1; i < _cells.Length; i++)
+        for (int i = 1; i < Cells.Length; i++)
         {
-            _cells[i] = _cellsBeforeScroll[i - 1];
+            Cells[i] = _cellsBeforeScroll[i - 1];
         }
     }
 }

@@ -9,6 +9,7 @@ public class RevolverFire : MonoBehaviour, IDoneable
     private GameProgress _gameProgress;
     private RevolverShot _revolverShot;
     private RevolverClick _revolverClick;
+    private GamePlayersList _gamePlayersList;
 
     public Action Done { get; set; }
 
@@ -16,12 +17,14 @@ public class RevolverFire : MonoBehaviour, IDoneable
     public void Construct(RevolverLoad revolverLoad,
                           GameProgress gameProgress,
                           RevolverShot revolverShot,
-                          RevolverClick revolverClick)
+                          RevolverClick revolverClick, 
+                          GamePlayersList gamePlayersList)
     {
         _revolverLoad = revolverLoad;
         _gameProgress = gameProgress;
         _revolverShot = revolverShot;
         _revolverClick = revolverClick;
+        _gamePlayersList = gamePlayersList;
     }
 
     private void Awake()
@@ -32,19 +35,17 @@ public class RevolverFire : MonoBehaviour, IDoneable
     private void Fire()
     {
         bool cellLoaded = _revolverLoad.RevolverCells.GetLast();
+        print("Cell loaded " + cellLoaded);
 
-        _revolverShot.Done?.Invoke();
-        _gameProgress.CurrentPlayer.DeathPush.Push();
+        if (cellLoaded)
+        {
+            _revolverShot.Done?.Invoke();
+            _gameProgress.CurrentPlayer.TogglersToggle.RpcToggle(false);
 
-        //if (cellLoaded)
-        //{
-        //    _revolverShot.Done?.Invoke();
-        //    _gameProgress.CurrentPlayer.DeathPush.Push();
+            return;
+        }
 
-        //    return;
-        //}
-
-        //_revolverClick.Done?.Invoke();
+        _revolverClick.Done?.Invoke();
     }
 
     private void OnDestroy()

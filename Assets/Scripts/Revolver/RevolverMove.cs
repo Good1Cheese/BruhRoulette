@@ -15,6 +15,7 @@ public class RevolverMove : CoroutineUser
     public override IEnumerator Coroutine()
     {
         float currentTime = 0;
+
         GetTargetPositionAndRotation();
 
         while (currentTime < MoveTime)
@@ -36,13 +37,15 @@ public class RevolverMove : CoroutineUser
 
     private void UpdatePosition()
     {
-        Vector3 position = Vector3.Slerp(transform.position, _targetPosition, _rotateSmoothing * Time.deltaTime);
-        transform.position = position;
+        transform.position = Vector3.Slerp(transform.position,
+                                           _targetPosition,
+                                           _rotateSmoothing * Time.deltaTime);
     }
 
     private void UpdateRotation()
     {
-        Quaternion rotation = Quaternion.Lerp(transform.rotation, _targetRotation, _rotateSmoothing * Time.deltaTime);
-        transform.rotation = rotation;
+        transform.rotation = Quaternion.Lerp(transform.rotation,
+                                             _targetRotation,
+                                             _rotateSmoothing * Time.deltaTime);
     }
 }

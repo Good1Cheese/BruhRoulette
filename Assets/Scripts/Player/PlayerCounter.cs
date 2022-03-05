@@ -1,8 +1,6 @@
 using Mirror;
-using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(DeathPush))]
 public class PlayerCounter : NetworkBehaviour
 {
     private PlayersList _list;
@@ -18,7 +16,9 @@ public class PlayerCounter : NetworkBehaviour
     {
         base.OnStartClient();
 
-        _player = new GamePlayer(netId, transform, GetComponent<DeathPush>());
+        var togglersToggle = GetComponent<PlayerTogglersEnablerDisabler>();
+        _player = new GamePlayer(netId, togglersToggle);
+
         CmdAddPlayer();
     }
 
