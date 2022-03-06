@@ -9,7 +9,6 @@ public class RevolverFire : MonoBehaviour, IDoneable
     private GameProgress _gameProgress;
     private RevolverShot _revolverShot;
     private RevolverClick _revolverClick;
-    private GamePlayersList _gamePlayersList;
 
     public Action Done { get; set; }
 
@@ -17,14 +16,12 @@ public class RevolverFire : MonoBehaviour, IDoneable
     public void Construct(RevolverLoad revolverLoad,
                           GameProgress gameProgress,
                           RevolverShot revolverShot,
-                          RevolverClick revolverClick, 
-                          GamePlayersList gamePlayersList)
+                          RevolverClick revolverClick)
     {
         _revolverLoad = revolverLoad;
         _gameProgress = gameProgress;
         _revolverShot = revolverShot;
         _revolverClick = revolverClick;
-        _gamePlayersList = gamePlayersList;
     }
 
     private void Awake()
@@ -35,7 +32,6 @@ public class RevolverFire : MonoBehaviour, IDoneable
     private void Fire()
     {
         bool cellLoaded = _revolverLoad.RevolverCells.GetLast();
-        print("Cell loaded " + cellLoaded);
 
         if (cellLoaded)
         {

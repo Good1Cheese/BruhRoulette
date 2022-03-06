@@ -45,11 +45,11 @@ public class ButtonInputHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameProgress.CurrentNetIdUpdated += UpdateCurrentNetId;
+        _gameProgress.MextMoveStarted += UpdateCurrentNetId;
     }
 
     private void OnDestroy()
     {
-        _gameProgress.CurrentNetIdUpdated -= UpdateCurrentNetId;
+        _gameProgress.MextMoveStarted -= UpdateCurrentNetId;
     }
 }

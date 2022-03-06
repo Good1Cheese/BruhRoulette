@@ -17,7 +17,7 @@ public class GamePlayersList : MonoBehaviour
         _gameStart = gameStart;
         _playersList = playersList;
         _revolverShot = revolverShot;
-        _gameProgress = gameProgress;  
+        _gameProgress = gameProgress;
     }
 
     private void Start()
@@ -26,8 +26,15 @@ public class GamePlayersList : MonoBehaviour
         _revolverShot.Done += RemoveCurrent;
     }
 
-    private void UpdatePlayers() => List = new List<GamePlayer>(_playersList.List);
-    private void RemoveCurrent() => List.Remove(_gameProgress.CurrentPlayer);
+    private void UpdatePlayers()
+    {
+        List = new List<GamePlayer>(_playersList.List);
+    }
+
+    private void RemoveCurrent()
+    {
+        List.Remove(_gameProgress.CurrentPlayer);
+    }
 
     public GamePlayer GetRandom()
     {

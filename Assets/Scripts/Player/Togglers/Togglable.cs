@@ -2,16 +2,22 @@
 
 public abstract class Togglable : NetworkBehaviour
 {
-    private PlayerTogglersEnablerDisabler _toggler;
+    private TogglersEnablerDisabler _toggler;
 
     protected void Awake()
     {
-        _toggler = GetComponent<PlayerTogglersEnablerDisabler>();
+        _toggler = GetComponent<TogglersEnablerDisabler>();
     }
 
-    protected void OnEnable() => _toggler.Toggled += Toggle;
+    protected void OnEnable()
+    {
+        _toggler.Toggled += Toggle;
+    }
 
-    protected void OnDestroy() => _toggler.Toggled -= Toggle;
+    protected void OnDestroy()
+    {
+        _toggler.Toggled -= Toggle;
+    }
 
     public override void OnStartLocalPlayer()
     {

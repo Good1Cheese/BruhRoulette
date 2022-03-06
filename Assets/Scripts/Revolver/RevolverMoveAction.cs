@@ -20,7 +20,7 @@ public class RevolverMoveAction : RevolverAction
     {
         base.Awake();
 
-        _gameProgress.CurrentNetIdUpdated += MoveNext;
+        _gameProgress.MextMoveStarted += MoveNext;
     }
 
     private void MoveNext(GamePlayer player)
@@ -36,6 +36,6 @@ public class RevolverMoveAction : RevolverAction
 
     private void OnDestroy()
     {
-        _gameProgress.CurrentNetIdUpdated -= MoveNext;
+        _gameProgress.MextMoveStarted -= MoveNext;
     }
 }

@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CameraToggler), typeof(InputContainer))]
-public class PlayerTogglersEnablerDisabler : NetworkBehaviour
+public class TogglersEnablerDisabler : NetworkBehaviour
 {
     [SerializeField] private float _delay;
 
@@ -31,10 +31,8 @@ public class PlayerTogglersEnablerDisabler : NetworkBehaviour
     [TargetRpc]
     public void RpcToggleWithoutDelay(bool value)
     {
-        _toggled = value;
-
         RagdollToggler.Toggle(value);
-        Toggled.Invoke(_toggled);
+        Toggled.Invoke(value);
     }
 
     private IEnumerator Coroutine()

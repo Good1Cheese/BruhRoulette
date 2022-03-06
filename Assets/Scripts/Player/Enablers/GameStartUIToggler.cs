@@ -8,6 +8,7 @@ public class GameStartUIToggler : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
+
         Toggle(true);
     }
 

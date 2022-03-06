@@ -8,6 +8,7 @@ public class AudioListenerEnabler : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
+
         _listener.enabled = true;
     }
 }

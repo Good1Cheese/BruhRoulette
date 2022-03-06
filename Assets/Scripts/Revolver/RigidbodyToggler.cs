@@ -15,6 +15,13 @@ public class RigidbodyToggler
         Rigidbody.useGravity = value;
     }
 
-    public void Enable() => Toggle(true);
-    public void Disable() => Toggle(false);
+    public void Enable()
+    {
+        Toggle(true);
+    }
+
+    public void Disable()
+    {
+        Toggle(false);
+    }
 }

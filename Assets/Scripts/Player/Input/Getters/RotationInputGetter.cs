@@ -26,6 +26,6 @@ public class RotationInputGetter : InputGetter
 
     protected override void Unsubscribe()
     {
-        _inputContainer.Input.Main.View.performed -= GetContext; 
+        _inputContainer.Input.Main.View.performed -= GetContext;
     }
 }

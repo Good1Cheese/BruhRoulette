@@ -16,15 +16,13 @@ public class PlayerCounter : NetworkBehaviour
     {
         base.OnStartClient();
 
-        var togglersToggle = GetComponent<PlayerTogglersEnablerDisabler>();
-        _player = new GamePlayer(netId, togglersToggle);
-
         CmdAddPlayer();
     }
 
     [Command]
     private void CmdAddPlayer()
     {
+        _player = new GamePlayer(netId, GetComponent<TogglersEnablerDisabler>());
         _list.Add(_player);
     }
 }

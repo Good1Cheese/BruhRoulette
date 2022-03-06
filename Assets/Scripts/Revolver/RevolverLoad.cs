@@ -25,11 +25,14 @@ public class RevolverLoad : MonoBehaviour
     {
         _revolverCells = new RevolverCells(CellsCount);
 
-        var random = GetRandomCell();
-        _revolverCells.SetGay(random);
+        int random = GetRandomCell();
+        _revolverCells.Fill(random);
     }
 
-    private int GetRandomCell() => Random.Range(0, 5);
+    private int GetRandomCell()
+    {
+        return Random.Range(0, 5);
+    }
 
     private void OnDestroy()
     {

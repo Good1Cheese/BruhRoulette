@@ -25,7 +25,10 @@ public class GameEnd : MonoBehaviour
         _gameRestart.Restarted += OnGameRestart;
     }
 
-    private void OnGameRestart() => IsEnded = false;
+    private void OnGameRestart()
+    {
+        IsEnded = false;
+    }
 
     public void StopGameIfNeeded()
     {

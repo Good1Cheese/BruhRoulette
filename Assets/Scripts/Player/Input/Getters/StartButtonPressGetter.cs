@@ -17,7 +17,7 @@ public class StartButtonPressGetter : InputGetter
     {
         base.Awake();
 
-        var cameraToggler = GetComponent<CameraToggler>();
+        CameraToggler cameraToggler = GetComponent<CameraToggler>();
         _camera = cameraToggler.Camera.transform;
     }
 

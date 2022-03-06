@@ -714,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a67ac065017823b40b925a863be41384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateSmoothing: 8
+  _rotateSmoothing: 5
   _points:
   - {fileID: 0}
   - {fileID: 0}
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3303a914f59cede46a56f11efaf852d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _actionDelay: 0.8
+  _actionDelay: 1
 --- !u!114 &3278904552311747436
 MonoBehaviour:
   m_ObjectHideFlags: 0

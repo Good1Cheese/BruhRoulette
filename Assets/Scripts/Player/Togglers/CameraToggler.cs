@@ -1,4 +1,3 @@
-using Mirror;
 using UnityEngine;
 
 public class CameraToggler : Togglable
@@ -7,7 +6,10 @@ public class CameraToggler : Togglable
 
     public Camera Camera => _camera;
 
-    public override void Toggle(bool value) => _camera.enabled = value;
+    public override void Toggle(bool value)
+    {
+        _camera.enabled = value;
+    }
 
     private new void OnEnable()
     {

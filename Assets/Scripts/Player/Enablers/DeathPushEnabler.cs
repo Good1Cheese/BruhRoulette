@@ -1,4 +1,4 @@
-﻿public class DeathEffectActivator : ExplosionForceUser
+﻿public class DeathPushEnabler : ExplosionForceUser
 {
     private RagdollToggler _ragdollToggler;
 

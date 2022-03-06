@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87449ae95f675e9489f4820202543068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveTime: 2
+  _moveTime: 3
 --- !u!114 &134178577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303e42490c7839f4fac3c56fd0e811ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delay: 10
+  _delay: 4
 --- !u!114 &134178578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -860,8 +860,6 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 3821471288205466074, guid: 0db8958c3c1b57642bf87d53b4f0d5e1, type: 3}
   - {fileID: 3821471288205466074, guid: 281808a7b0d8e2f4dbdcf74d310ef1cd, type: 3}
-  - {fileID: 3821471288205466074, guid: d63fd1dbbb57b6744a3ee74ab3444d78, type: 3}
-  - {fileID: 3821471288205466074, guid: 4858aab100039af47990f633624557bf, type: 3}
   - {fileID: 3821471288205466074, guid: 9e94e0d4a1c601441854026a49fee7ae, type: 3}
   - {fileID: 3821471288205466074, guid: f3882aa13d39a5142acb212283813667, type: 3}
 --- !u!1 &593664649

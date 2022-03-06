@@ -2,17 +2,17 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(DeathEffectActivator))]
+[RequireComponent(typeof(DeathPushEnabler))]
 public class RagdollToggler : NetworkBehaviour
 {
     private PlayersPositionReset _playersPositionReset;
 
     public Action Enabled { get; set; }
-    public Rigidbody[] Rigidbodies { get; private set; }
+    public Rigidbody[] RagdollParts { get; private set; }
 
     private void Awake()
     {
-        Rigidbodies = GetComponentsInChildren<Rigidbody>();
+        RagdollParts = GetComponentsInChildren<Rigidbody>();
 
         _playersPositionReset = GetComponent<PlayersPositionReset>();
         _playersPositionReset.RagdollToggler = this;
@@ -34,14 +34,14 @@ public class RagdollToggler : NetworkBehaviour
             return;
         }
 
-        _playersPositionReset.ResetPosition();
+        _playersPositionReset.Reset();
     }
 
     public void DoActionWithRigigbodies(Action<Rigidbody> action)
     {
-        for (int i = 0; i < Rigidbodies.Length; i++)
+        for (int i = 0; i < RagdollParts.Length; i++)
         {
-            action(Rigidbodies[i]);
+            action(RagdollParts[i]);
         }
     }
 }

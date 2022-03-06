@@ -6,6 +6,7 @@ public class StartButtonPressHandler : MonoBehaviour
     [SerializeField] private LayerMask _startButtonMask;
     [SerializeField] private int _pressMaxDistance;
 
+    private RaycastHit _raycastHit;
     private Ray _ray = new Ray();
     private GameStart _gameStart;
 
@@ -17,14 +18,17 @@ public class StartButtonPressHandler : MonoBehaviour
 
     public void Handle(Transform playerTransform)
     {
+        if (!Raycast(playerTransform) || _gameStart.IsStarted) { return; }
+
+        _raycastHit.collider.gameObject.SetActive(false);
+        _gameStart.StartGame();
+    }
+
+    private bool Raycast(Transform playerTransform)
+    {
         _ray.origin = playerTransform.position;
         _ray.direction = playerTransform.forward;
 
-        if (!Physics.Raycast(_ray, out RaycastHit raycastHit, _pressMaxDistance, _startButtonMask)) { return; }
-
-        if (_gameStart.IsStarted) { return; }
-
-        raycastHit.collider.gameObject.SetActive(false);
-        _gameStart.StartGame();
+        return Physics.Raycast(_ray, out _raycastHit, _pressMaxDistance, _startButtonMask);
     }
 }

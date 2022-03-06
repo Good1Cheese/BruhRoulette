@@ -8,5 +8,8 @@ public class PlayersList : MonoBehaviour
 
     public GamePlayer this[int index] => List[index];
 
-    public void Add(GamePlayer player) => List.Add(player);
+    public void Add(GamePlayer player)
+    {
+        List.Add(player);
+    }
 }

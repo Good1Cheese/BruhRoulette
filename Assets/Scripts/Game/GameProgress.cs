@@ -14,7 +14,7 @@ public class GameProgress : CoroutineUser
 
     public GamePlayer CurrentPlayer { get; set; }
     public Action MoveMade { get; set; }
-    public Action<GamePlayer> CurrentNetIdUpdated { get; set; }
+    public Action<GamePlayer> MextMoveStarted { get; set; }
 
     [Inject]
     public void Construct(FireButtonInputHandler fireInputHandler,
@@ -24,12 +24,12 @@ public class GameProgress : CoroutineUser
         _fireInputHandler = fireInputHandler;
         _currentPlayersList = currentPlayersList;
         _gameEnd = gameEnd;
+
+        _moveTimeout = new WaitForSeconds(_moveTime);
     }
 
     private void Start()
     {
-        _moveTimeout = new WaitForSeconds(_moveTime);
-
         _fireInputHandler.Handled += StartNext;
     }
 
@@ -38,7 +38,6 @@ public class GameProgress : CoroutineUser
         MoveMade?.Invoke();
         StopCoroutine();
 
-        print(_gameEnd.IsEnded);
         if (_gameEnd.IsEnded) { return; }
 
         StartCoroutine();
@@ -47,7 +46,7 @@ public class GameProgress : CoroutineUser
     public override IEnumerator Coroutine()
     {
         CurrentPlayer = _currentPlayersList.GetRandom();
-        CurrentNetIdUpdated?.Invoke(CurrentPlayer);
+        MextMoveStarted?.Invoke(CurrentPlayer);
 
         yield return _moveTimeout;
 
