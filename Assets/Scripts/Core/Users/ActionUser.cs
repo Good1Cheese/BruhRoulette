@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public abstract class RevolverAction : MonoBehaviour, IDoneable
+public abstract class BaseAction : MonoBehaviour, IDoneable
 {
     [SerializeField] protected float _actionDelay;
 
@@ -10,7 +10,6 @@ public abstract class RevolverAction : MonoBehaviour, IDoneable
     protected PlayerAction _action;
 
     public Action Done { get; set; }
-    public float ActionDelay => _actionDelay;
 
     [Inject]
     public void Construct(ActionsHandler actionsHandler)
@@ -21,11 +20,6 @@ public abstract class RevolverAction : MonoBehaviour, IDoneable
     protected void Awake()
     {
         _action = new PlayerAction(_actionDelay, () => DoAction());
-    }
-
-    protected void PerformAction()
-    {
-        _actionsHandler.StartAction(_action);
     }
 
     protected abstract void DoAction();

@@ -1,22 +1,26 @@
 ﻿using Mirror;
 using UnityEngine.InputSystem;
 
-public abstract class InputGetter : NetworkBehaviour
+public abstract class InputReveiver : NetworkBehaviour
 {
     protected InputContainer _inputContainer;
-    protected InputAction.CallbackContext _context;
 
     protected void Awake()
     {
         _inputContainer = GetComponent<InputContainer>();
     }
 
-    protected void GetContext(InputAction.CallbackContext context)
+    protected virtual void Receive(InputAction.CallbackContext context)
     {
         if (!isLocalPlayer) { return; }
 
-        _context = context;
-        OnInputGetted();
+        CmdSend();
+    }
+
+    [Command]
+    protected virtual void CmdSend()
+    {
+        Send();
     }
 
     private void OnEnable()
@@ -29,7 +33,7 @@ public abstract class InputGetter : NetworkBehaviour
         Unsubscribe();
     }
 
-    protected abstract void OnInputGetted();
+    protected abstract void Send();
     protected abstract void Subscribe();
     protected abstract void Unsubscribe();
 }

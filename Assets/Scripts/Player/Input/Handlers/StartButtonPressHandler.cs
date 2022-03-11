@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 public class StartButtonPressHandler : MonoBehaviour
@@ -16,18 +17,18 @@ public class StartButtonPressHandler : MonoBehaviour
         _gameStart = gameStart;
     }
 
-    public void Handle(Transform playerTransform)
+    public void Handle(Transform camera)
     {
-        if (!Raycast(playerTransform) || _gameStart.IsStarted) { return; }
+        if (!Raycast(camera) || _gameStart.IsStarted) { return; }
 
         _raycastHit.collider.gameObject.SetActive(false);
         _gameStart.StartGame();
     }
 
-    private bool Raycast(Transform playerTransform)
+    private bool Raycast(Transform camera)
     {
-        _ray.origin = playerTransform.position;
-        _ray.direction = playerTransform.forward;
+        _ray.origin = camera.position;
+        _ray.direction = camera.forward;
 
         return Physics.Raycast(_ray, out _raycastHit, _pressMaxDistance, _startButtonMask);
     }

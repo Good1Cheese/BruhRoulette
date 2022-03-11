@@ -2,17 +2,18 @@
 using Zenject;
 
 [RequireComponent(typeof(RevolverMove))]
-public class RevolverMoveAction : RevolverAction
+public class RevolverMoveAction : BaseAction
 {
     private RevolverMove _revolverMove;
     private GameProgress _gameProgress;
 
     [Inject]
-    public void Construct(GameProgress gameProgress, RevolverMove revolverMove)
+    public void Construct(GameProgress gameProgress, RevolverMove revolverMove, ActionsHandler actionsHandler)
     {
         _gameProgress = gameProgress;
-
         _revolverMove = revolverMove;
+        _actionsHandler = actionsHandler;
+
         _revolverMove.MoveTime = _actionDelay;
     }
 
@@ -20,22 +21,19 @@ public class RevolverMoveAction : RevolverAction
     {
         base.Awake();
 
-        _gameProgress.MextMoveStarted += MoveNext;
+        _gameProgress.NextMoveStarted += PerformAction;
     }
 
-    private void MoveNext(GamePlayer player)
+    private void PerformAction(GamePlayer player)
     {
         _revolverMove.CurrentPlayer = player;
-        PerformAction();
+        _actionsHandler.AddInQueue(_action);
     }
 
-    protected override void DoAction()
-    {
-        _revolverMove.StartWithInterrupt();
-    }
+    protected override void DoAction() => _revolverMove.StartWithInterrupt();
 
     private void OnDestroy()
     {
-        _gameProgress.MextMoveStarted -= MoveNext;
+        _gameProgress.NextMoveStarted -= PerformAction;
     }
 }

@@ -4,6 +4,8 @@ using Zenject;
 
 public class GameEnd : MonoBehaviour
 {
+    private const int GAME_END_PLAYERS_COUNT = 1;
+
     private GamePlayersList _currentPlayersList;
     private GameProgress _gameProgress;
     private GameRestart _gameRestart;
@@ -32,7 +34,7 @@ public class GameEnd : MonoBehaviour
 
     public void StopGameIfNeeded()
     {
-        if (IsEnded || _currentPlayersList.List.Count > 1) { return; }
+        if (IsEnded || _currentPlayersList.List.Count > GAME_END_PLAYERS_COUNT) { return; }
 
         Ended?.Invoke();
         IsEnded = true;

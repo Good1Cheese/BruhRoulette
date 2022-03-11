@@ -1,9 +1,6 @@
-using Mirror;
-using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(InputContainer))]
-public class FireButtonInputGetter : InputGetter
+public class FireButtonInputGetter : InputReveiver
 {
     private FireButtonInputHandler _handler;
 
@@ -13,24 +10,18 @@ public class FireButtonInputGetter : InputGetter
         _handler = handler;
     }
 
-    protected override void OnInputGetted()
-    {
-        CmdHandleInput();
-    }
-
-    [Command]
-    private void CmdHandleInput()
+    protected override void Send()
     {
         _handler.Handle(netId);
     }
 
     protected override void Subscribe()
     {
-        _inputContainer.Input.Revolver.Fire.performed += GetContext;
+        _inputContainer.Input.Revolver.Fire.performed += Receive;
     }
 
     protected override void Unsubscribe()
     {
-        _inputContainer.Input.Revolver.Fire.performed -= GetContext;
+        _inputContainer.Input.Revolver.Fire.performed -= Receive;
     }
 }

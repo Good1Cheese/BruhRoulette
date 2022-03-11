@@ -59,7 +59,6 @@
     <Compile Include="Assets\Scripts\Revolver\RevolverMove.cs" />
     <Compile Include="Assets\Scripts\Player\Togglers\RagdollToggler.cs" />
     <Compile Include="Assets\Scripts\Revolver\SoundPlayers\RevolverSoundPlayer.cs" />
-    <Compile Include="Assets\Scripts\Player\Input\Getters\InputGetter.cs" />
     <Compile Include="Assets\Scripts\Core\PlayerFactory.cs" />
     <Compile Include="Assets\Scripts\Game\GameEnd.cs" />
     <Compile Include="Assets\Scripts\Core\PlayersReset.cs" />
@@ -87,6 +86,7 @@
     <Compile Include="Assets\Scripts\Player\Enablers\GameStartUIToggler.cs" />
     <Compile Include="Assets\Scripts\Core\Actions\PlayerAction.cs" />
     <Compile Include="Assets\Scripts\Game\GameProgress.cs" />
+    <Compile Include="Assets\Scripts\Player\Input\Getters\InputReveiver.cs" />
     <Compile Include="Assets\Scripts\Revolver\RevolverLoad.cs" />
     <Compile Include="Assets\Scripts\Player\Enablers\AudioListenerEnabler.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Handlers\FireButtonInputHandler.cs" />
@@ -98,21 +98,22 @@
     <Compile Include="Assets\Scripts\Player\PlayerCounter.cs" />
     <Compile Include="Assets\Scripts\Game\GamePlayer.cs" />
     <Compile Include="Assets\Scripts\Revolver\RevolverSpin.cs" />
-    <Compile Include="Assets\Scripts\Core\Actions\RevolverAction.cs" />
+    <Compile Include="Assets\Scripts\Core\Users\ActionUser.cs" />
     <Compile Include="Assets\Scripts\Core\PlayersSpawnPositionSetter.cs" />
     <Compile Include="Assets\Scripts\Player\Togglers\TogglersEnablerDisabler.cs" />
+    <Compile Include="Assets\Scripts\Player\ArmsRotator.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Getters\StartButtonPressGetter.cs" />
     <Compile Include="Assets\Scripts\Revolver\RevolverDrop.cs" />
-    <Compile Include="Assets\Scripts\Player\Input\Getters\ScrollButtonInputGetter.cs" />
+    <Compile Include="Assets\Scripts\Player\Input\Getters\SpinButtonInputGetter.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Core\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Game\GameRestart.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Handlers\SpinButtonInputHandler.cs" />
     <Compile Include="Assets\Scripts\Revolver\SoundPlayers\RevolverSpinSound.cs" />
     <Compile Include="Assets\Scripts\Player\Input\Handlers\StartButtonPressHandler.cs" />
+    <Compile Include="Assets\Scripts\Player\Reset\PositionAndRotation.cs" />
     <Compile Include="Assets\Scripts\Revolver\Fire\RevolverShot.cs" />
     <Compile Include="Assets\Scripts\Player\Togglers\CameraToggler.cs" />
     <Compile Include="Assets\Scripts\Revolver\RigidbodyToggler.cs" />
-    <Compile Include="Assets\Scripts\Player\Reset\PositionAndRotation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />

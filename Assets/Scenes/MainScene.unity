@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87449ae95f675e9489f4820202543068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveTime: 3
+  _moveTime: 15
 --- !u!114 &134178577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303e42490c7839f4fac3c56fd0e811ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delay: 4
+  _delay: 5
 --- !u!114 &134178578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,6 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ac54bb9c327a64fa04e45f7ebad800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _actionDelay: 1.5
 --- !u!114 &535213383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,6 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff240ad28c849848a6ac5cf6201f137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _actionDelay: 0.3
 --- !u!114 &535213387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,7 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Port: 7777
+  Port: 8007
   DualMode: 1
   NoDelay: 1
   Interval: 10
@@ -851,7 +853,7 @@ MonoBehaviour:
   offlineScene: 
   onlineScene: 
   transport: {fileID: 540067658}
-  networkAddress: localhost
+  networkAddress: 127.0.0.1
   maxConnections: 4
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 0}

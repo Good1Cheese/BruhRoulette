@@ -1,33 +1,29 @@
 ﻿using System;
-using UnityEngine;
 using Zenject;
 
-public class ButtonInputHandler : MonoBehaviour
+public class ButtonInputHandler : BaseAction
 {
     private GameStart _gameStart;
     private GameProgress _gameProgress;
     private GameEnd _gameEnd;
-    private ActionsHandler _actionsHandler;
-    private bool _handled;
 
     public uint CurrentPlayerNetId { get; set; }
     public Action Handled { get; set; }
+    public bool IsHandled { get; set; }
 
     [Inject]
     public void Construct(GameStart gameStart,
                           GameProgress gameProgress,
-                          GameEnd gameEnd,
-                          ActionsHandler actionsHandler)
+                          GameEnd gameEnd)
     {
         _gameStart = gameStart;
         _gameProgress = gameProgress;
         _gameEnd = gameEnd;
-        _actionsHandler = actionsHandler;
     }
 
     private void UpdateCurrentNetId(GamePlayer player)
     {
-        _handled = false;
+        IsHandled = false;
         CurrentPlayerNetId = player.NetId;
     }
 
@@ -36,20 +32,21 @@ public class ButtonInputHandler : MonoBehaviour
         if (!_gameStart.IsStarted
             || _gameEnd.IsEnded
             || netId != CurrentPlayerNetId
-            || _actionsHandler.IsActionGoing
-            || _handled) { return; }
+            || IsHandled) { return; }
 
-        _handled = true;
-        Handled?.Invoke();
+        IsHandled = true;
+        _actionsHandler.AddInQueue(_action);
     }
+
+    protected override void DoAction() => Handled?.Invoke();
 
     private void OnEnable()
     {
-        _gameProgress.MextMoveStarted += UpdateCurrentNetId;
+        _gameProgress.NextMoveStarted += UpdateCurrentNetId;
     }
 
     private void OnDestroy()
     {
-        _gameProgress.MextMoveStarted -= UpdateCurrentNetId;
+        _gameProgress.NextMoveStarted -= UpdateCurrentNetId;
     }
 }

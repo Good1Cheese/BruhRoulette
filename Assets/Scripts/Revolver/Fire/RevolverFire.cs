@@ -9,6 +9,7 @@ public class RevolverFire : MonoBehaviour, IDoneable
     private GameProgress _gameProgress;
     private RevolverShot _revolverShot;
     private RevolverClick _revolverClick;
+    private FireButtonInputHandler _inputHandler;
 
     public Action Done { get; set; }
 
@@ -16,17 +17,19 @@ public class RevolverFire : MonoBehaviour, IDoneable
     public void Construct(RevolverLoad revolverLoad,
                           GameProgress gameProgress,
                           RevolverShot revolverShot,
-                          RevolverClick revolverClick)
+                          RevolverClick revolverClick, 
+                          FireButtonInputHandler fireButtonInputHandler)
     {
         _revolverLoad = revolverLoad;
         _gameProgress = gameProgress;
         _revolverShot = revolverShot;
         _revolverClick = revolverClick;
+        _inputHandler = fireButtonInputHandler;
     }
 
     private void Awake()
     {
-        _gameProgress.MoveMade += Fire;
+        _inputHandler.Handled += Fire;
     }
 
     private void Fire()
@@ -46,6 +49,6 @@ public class RevolverFire : MonoBehaviour, IDoneable
 
     private void OnDestroy()
     {
-        _gameProgress.MoveMade -= Fire;
+        _inputHandler.Handled -= Fire;
     }
 }

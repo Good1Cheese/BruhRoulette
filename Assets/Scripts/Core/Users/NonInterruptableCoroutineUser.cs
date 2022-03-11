@@ -14,4 +14,10 @@
         IsActionGoing = true;
         base.StartCoroutine();
     }
+
+    protected override void StopCoroutine()
+    {
+        IsActionGoing = false;
+        base.StopCoroutine();
+    }
 }

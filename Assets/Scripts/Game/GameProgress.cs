@@ -10,11 +10,12 @@ public class GameProgress : CoroutineUser
     private FireButtonInputHandler _fireInputHandler;
     private GamePlayersList _currentPlayersList;
     private GameEnd _gameEnd;
+
     private WaitForSeconds _moveTimeout;
 
     public GamePlayer CurrentPlayer { get; set; }
     public Action MoveMade { get; set; }
-    public Action<GamePlayer> MextMoveStarted { get; set; }
+    public Action<GamePlayer> NextMoveStarted { get; set; }
 
     [Inject]
     public void Construct(FireButtonInputHandler fireInputHandler,
@@ -35,6 +36,8 @@ public class GameProgress : CoroutineUser
 
     public void StartNext()
     {
+        if (!_fireInputHandler.IsHandled) { return; }
+
         MoveMade?.Invoke();
         StopCoroutine();
 
@@ -46,11 +49,11 @@ public class GameProgress : CoroutineUser
     public override IEnumerator Coroutine()
     {
         CurrentPlayer = _currentPlayersList.GetRandom();
-        MextMoveStarted?.Invoke(CurrentPlayer);
+        NextMoveStarted?.Invoke(CurrentPlayer);
 
         yield return _moveTimeout;
 
-        StartNext();
+        _fireInputHandler.Handle(CurrentPlayer.NetId);
     }
 
     private void OnDestroy()

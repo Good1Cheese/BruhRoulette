@@ -1,11 +1,10 @@
-using Mirror;
 using UnityEngine;
 using Zenject;
 
-public class StartButtonPressGetter : InputGetter
+public class StartButtonPressGetter : InputReveiver
 {
-    private Transform _camera;
     private StartButtonPressHandler _handler;
+    private Transform _camera;
 
     [Inject]
     public void Construct(StartButtonPressHandler handler)
@@ -13,32 +12,23 @@ public class StartButtonPressGetter : InputGetter
         _handler = handler;
     }
 
-    private new void Awake()
+    private void Start()
     {
-        base.Awake();
-
-        CameraToggler cameraToggler = GetComponent<CameraToggler>();
-        _camera = cameraToggler.Camera.transform;
+        _camera = GetComponent<CameraToggler>().Camera.transform;
     }
 
-    protected override void OnInputGetted()
+    protected override void Send()
     {
-        CmdHandleInput();
-    }
-
-    [Command]
-    private void CmdHandleInput()
-    {
-        _handler.Handle(_camera.transform);
+        _handler.Handle(_camera);
     }
 
     protected override void Subscribe()
     {
-        _inputContainer.Input.Main.StartButtonPress.performed += GetContext;
+        _inputContainer.Input.Main.StartButtonPress.performed += Receive;
     }
 
     protected override void Unsubscribe()
     {
-        _inputContainer.Input.Main.StartButtonPress.performed -= GetContext;
+        _inputContainer.Input.Main.StartButtonPress.performed -= Receive;
     }
 }

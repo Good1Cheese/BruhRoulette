@@ -1244,8 +1244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8fc531e0ef5094e9c84d98692c6d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _xSensivity: 4
-  _ySensivity: 4
+  _xSensivity: 3.5
+  _ySensivity: 3.5
   _maxHorizontal: 180
   _maxVertical: 45
   _horizontalTarget: {fileID: 3319995873280490532}
@@ -1309,7 +1309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595045ca419f2e540b02476b0a8e84af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 3821471288205466074}
 --- !u!114 &391669023825654628
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public abstract class CoroutineUser : MonoBehaviour
         StartCoroutine(_enumerator);
     }
 
-    protected void StopCoroutine()
+    protected virtual void StopCoroutine()
     {
         StopCoroutine(_enumerator);
     }
